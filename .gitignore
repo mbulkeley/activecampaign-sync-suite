@@ -1,3 +1,53 @@
+# My additions
+config/*
+
+# PyCharm
+.idea/
+*.iml
+*.iws
+*.ipr
+*.idea/*
+.idea/.idea/
+.idea/.name
+.idea/modules.xml
+.idea/.idea_modules.xml
+.idea/workspace.xml
+.idea/misc.xml
+.idea/gradle.xml
+.idea/usage.statistics.xml
+.idea/vcs.xml
+.idea/dictionaries
+.idea/sshConfigs.xml
+.idea/inspectionProfiles/
+.idea/jsLibraryMappings.xml
+.idea/libraries/
+.idea/remoteDev/
+.idea/artifacts/
+.idea/shelf/
+.idea/dataSources/
+.idea/dataSources.ids
+.idea/dataSources.local.xml
+.idea/webpack.config.js
+.idea/.editorconfig
+
+# User-specific
+*.sublime-project
+*.sublime-workspace
+
+# Other files
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*.DS_Store
+
+/shelf/
+/workspace.xml
+misc.xml
+modules.xml
+
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -56,7 +106,6 @@ cover/
 *.pot
 
 # Django stuff:
-*.log
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
