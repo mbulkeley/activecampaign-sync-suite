@@ -1,6 +1,7 @@
-import requests
-import logging
 import backoff
+import logging
+import requests
+
 
 class ActiveCampaignClient:
     def __init__(self, api_key, base_url):

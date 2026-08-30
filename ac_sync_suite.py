@@ -14,18 +14,22 @@ Description:
     - ActiveCampaignClient: A class to manage communications with ActiveCampaign API.
     - SlackClient: A class to manage communications with Slack API.
     - Main functionality: Orchestrates the process of data fetching from ActiveCampaign,
-      processing this data, and updating it in Google Sheets & Docs.
+      processing this data, and updating it in Google Sheets & Docs and sending any notifications
+      to Slack.
 
 Changelog:
     1.0.0 (2024-08-08): Initial release to pull automation information from ActiveCampaign and push
                         this information to Google.
 
 License:
-    Apache 2.0
+    Apache-2.0 license
 """
 
 __version__ = "1.0.0"
 
+import warnings
+
+warnings.filterwarnings('ignore')
 import os
 import logging
 from datetime import datetime
@@ -52,6 +56,7 @@ now = datetime.now()
 date_time_str = now.strftime("%d-%m-%Y %H:%M")
 logging.debug(f"'Last updated', {date_time_str}")
 
+
 def main():
     ac_apikey = os.environ.get('ACTIVECAMPAIGN_API_KEY')
     ac_base_url = os.environ.get('ACTIVECAMPAIGN_BASE_URL')
@@ -66,7 +71,10 @@ def main():
     ac_client = ActiveCampaignClient(ac_apikey, ac_base_url)
     gs_client = GoogleSheetsClient(google_key_path, google_spreadsheet_id)
 
+    results = ac_client.get_automations()
+    logging.debug(results)
     logging.info("*** DONE ***")
+
 
 if __name__ == '__main__':
     main()

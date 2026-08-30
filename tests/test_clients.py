@@ -1,12 +1,18 @@
 import pytest
 from unittest.mock import patch
 from clients.active_campaign_client import ActiveCampaignClient
+import warnings
+from urllib3.exceptions import NotOpenSSLWarning
+
+# Suppress NotOpenSSLWarning
+warnings.filterwarnings('ignore', category=NotOpenSSLWarning, module='urllib3')
 
 @pytest.fixture
 def ac_client():
     api_key = 'test_api_key'
     base_url = 'https://test.activecampaign.com'
     return ActiveCampaignClient(api_key, base_url)
+
 
 @patch('clients.active_campaign_client.requests.Session.get')
 def test_get_automations(mock_get, ac_client):
@@ -16,7 +22,9 @@ def test_get_automations(mock_get, ac_client):
 
     response = ac_client.get_automations()
     assert response == {'automations': []}
-    mock_get.assert_called_once_with('https://test.activecampaign.com/api/3/automations', headers={'Accept': 'application/json', 'Api-Token': 'test_api_key'})
+    mock_get.assert_called_once_with('https://test.activecampaign.com/api/3/automations',
+                                     headers={'Accept': 'application/json', 'Api-Token': 'test_api_key'})
+
 
 if __name__ == '__main__':
     pytest.main()
